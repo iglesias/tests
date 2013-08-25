@@ -28,7 +28,7 @@ def plot_covariance_ellipse(covariance):
 	w, v = linalg.eigh(covariance)
 	# normalize the eigenvector corresponding to the largest eigenvalue
 	u = v[0]/linalg.norm(v[0])
-	# angle in radians degrees
+	# angle in degrees
 	angle = 180.0/numpy.pi*numpy.arctan(u[1]/u[0])
 	# fill Gaussian ellipse at 2 standard deviation
 	ellipse = patches.Ellipse(mean, 2*w[0]**0.5, 2*w[1]**0.5, 180+angle,
