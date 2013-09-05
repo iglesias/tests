@@ -20,7 +20,10 @@ int main(int,char**) {
     acc(standard_normal(rng));
 
   std::cout << "Sample mean:     " << mean(acc) << std::endl;
-  std::cout << "Sample variance: " << moment<2>(acc) << std::endl;
+  std::cout << "Sample variance: " << moment<2>(acc) << std::endl << std::endl;
+
+  std::cout << "Distribution mean:     " << standard_normal.mean() << std::endl;
+  std::cout << "Distribution stdev:    " << standard_normal.sigma() << std::endl;
 
   return 0;
 }
