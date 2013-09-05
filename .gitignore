@@ -1,0 +1,5 @@
+# directories for executables
+*bin/
+
+# executables in bin directories
+*/bin/*
