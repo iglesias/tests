@@ -77,7 +77,7 @@ class Particle2D {
     }
 
     void load(graphlab::iarchive& iarc) {
-      iarc >> angle >> weight >> loc.x >> loc.y >> lastLoc.y >> lastLoc.y;
+      iarc >> angle >> weight >> loc.x >> loc.y >> lastLoc.x >> lastLoc.y;
     }
 };
 
