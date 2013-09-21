@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 from modshogun import *
-import numpy
 
 # load wine data set
 features = RealFeatures(CSVFile('../data/fm_wine.dat'))
