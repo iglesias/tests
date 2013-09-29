@@ -1,14 +1,8 @@
 #!/usr/bin/python
 
 import matplotlib.pyplot as pyplot
-
 from modshogun import CSVFile, RealFeatures, MulticlassLabels
-
-features_file = '../data/fm_ape_gut.txt'
-labels_file = '../data/label_ape_gut.txt'
-
-features = RealFeatures(CSVFile(features_file))
-labels = MulticlassLabels(CSVFile(labels_file))
+import numpy
 
 class Data:
 	def __init__(self, features, labels):
@@ -51,10 +45,12 @@ def diagonal_lmnn(features,labels,k=3,max_iter=10000):
 	import numpy
 
 	lmnn = LMNN(features,labels,k)
-	lmnn.io.set_loglevel(MSG_DEBUG)
+# 	lmnn.io.set_loglevel(MSG_DEBUG)
 	lmnn.set_diagonal(True)
 	lmnn.set_maxiter(max_iter)
 	lmnn.train(numpy.eye(features.get_num_features()))
+
+	return lmnn
 
 def knn_classify(traindat, testdat, k=3):
 	from modshogun import KNN, MulticlassAccuracy, EuclideanDistance
@@ -97,4 +93,28 @@ def lmnn_classify(traindat, testdat, k=3):
 
 	return err
 
-diagonal_lmnn(features,labels,1,1200)
+features_file = '../data/fm_ape_gut.txt'
+labels_file = '../data/label_ape_gut.txt'
+
+features = RealFeatures(CSVFile(features_file))
+labels = MulticlassLabels(CSVFile(labels_file))
+
+# reduce the number of features to use so that the training is faster but still
+# the results of feature selection are significant
+fm = features.get_feature_matrix()
+features = RealFeatures(fm[:500, :])
+
+assert(features.get_num_vectors() == labels.get_num_labels())
+
+print('Number of examples = %d, number of features = %d.' % (features.get_num_vectors(), features.get_num_features()))
+
+visualize_tdsne(features, labels)
+lmnn = diagonal_lmnn(features, labels, max_iter=1200)
+
+diagonal_transform = lmnn.get_linear_transform()
+diagonal = numpy.diag(diagonal_transform)
+print('%d out of %d elements are non-zero' % (numpy.sum(diagonal != 0), diagonal.shape[0]))
+
+statistics = lmnn.get_statistics()
+pyplot.plot(statistics.obj.get())
+pyplot.show()
