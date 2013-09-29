@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 import matplotlib.pyplot as pyplot
-import pickle
 
 from modshogun import CSVFile, RealFeatures, MulticlassLabels
 
@@ -11,9 +10,12 @@ labels_file = '../data/label_ape_gut.txt'
 features = RealFeatures(CSVFile(features_file))
 labels = MulticlassLabels(CSVFile(labels_file))
 
+class Data:
+	def __init__(self, features, labels):
+		self.features = features
+		self.labels   = labels
 
 def plot_data(x,y):
-
 	pyplot.scatter(x[0,y==0], x[1,y==0], color='green')
 	pyplot.scatter(x[0,y==1], x[1,y==1], color='red')
 	pyplot.scatter(x[0,y==2], x[1,y==2], color='blue')
@@ -45,7 +47,6 @@ def visualize_spe(features,labels):
 	pyplot.show()
 
 def diagonal_lmnn(features,labels,k=3,max_iter=10000):
-
 	from modshogun import LMNN, MSG_DEBUG
 	import numpy
 
@@ -55,11 +56,45 @@ def diagonal_lmnn(features,labels,k=3,max_iter=10000):
 	lmnn.set_maxiter(max_iter)
 	lmnn.train(numpy.eye(features.get_num_features()))
 
-	pickle.dump(lmnn, open('lmnn_ape_gut_trained.p', 'wb'))
+def knn_classify(traindat, testdat, k=3):
+	from modshogun import KNN, MulticlassAccuracy, EuclideanDistance
 
-	linear_transform = lmnn.get_linear_transform()
-	diagonal = numpy.diag(linear_transform)
-	pyplot.stem(xrange(diagonal.size), diagonal)
-	pyplot.show()
+	train_features, train_labels = traindat.features, traindat.labels
 
-diagonal_lmnn(features,labels)
+	distance = EuclideanDistance(train_features, train_features)
+	knn = KNN(k, distance, train_labels)
+	knn.train()
+
+	test_features, test_labels = testdat.features, testdat.labels
+
+	predicted_labels = knn.apply(test_features)
+	evaluator = MulticlassAccuracy()
+	acc = evaluator.evaluate(predicted_labels, test_labels)
+	err = 1-acc
+
+	return err
+
+def lmnn_classify(traindat, testdat, k=3):
+	from modshogun import LMNN, KNN, MulticlassAccuracy, MSG_DEBUG
+
+	train_features, train_labels = traindat.features, traindat.labels
+
+	lmnn = LMNN(train_features, train_labels, k)
+	lmnn.set_maxiter(1200)
+	lmnn.io.set_loglevel(MSG_DEBUG)
+	lmnn.train()
+
+	distance = lmnn.get_distance()
+	knn = KNN(k, distance, train_labels)
+	knn.train()
+
+	test_features, test_labels = testdat.features, testdat.labels
+
+	predicted_labels = knn.apply(test_features)
+	evaluator = MulticlassAccuracy()
+	acc = evaluator.evaluate(predicted_labels, test_labels)
+	err = 1-acc
+
+	return err
+
+diagonal_lmnn(features,labels,1,1200)
