@@ -15,7 +15,7 @@ euclidean_distance = EuclideanDistance()
 knn.set_distance(euclidean_distance)
 
 # splitting strategy for 5-fold cross-validation
-# we use stratetified to maintain
+# we use stratified to maintain
 splitting_strategy = StratifiedCrossValidationSplitting(labels, 5)
 
 # evaluation method
