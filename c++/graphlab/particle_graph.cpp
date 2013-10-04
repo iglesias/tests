@@ -4,6 +4,7 @@
  * particle filter in the CGR algorithm. */
 
 #include <graphlab.hpp>
+#include <iostream>
 
 template <class num>
 class vector2d{
@@ -88,6 +89,18 @@ int main(int argc, char** argv) {
   graphlab::distributed_control dc;
 
   graph_type graph(dc);
+
+  // populate the graph with vertices
+  graph.add_vertex(0, Particle2D());
+  graph.add_vertex(1, Particle2D());
+  graph.add_vertex(2, Particle2D());
+
+  // commit the graph structure, marking that it is no longer to be modified
+  graph.finalize();
+
+  dc.cout() << "num_local_vertices = "  << graph.num_local_vertices() << std::endl;
+  dc.cout() << "num_local_own_vertices = "  << graph.num_local_own_vertices() << std::endl;
+  dc.cout() << "num_local_edges = "  << graph.num_local_edges() << std::endl;
 
   graphlab::mpi_tools::finalize();
 
