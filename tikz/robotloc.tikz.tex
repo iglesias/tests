@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage[active,tightpage]{preview}
+
+\PreviewEnvironment{tikzpicture}
+
+\tikzstyle{state}=[minimum size=28pt,shape=circle,draw=red!50,fill=red!20,thick]
+\tikzstyle{control}=[minimum size=28pt,shape=circle,draw=blue!50,fill=blue!20,thick]
+\tikzstyle{measurement}=[minimum size=28pt,shape=circle,draw=orange!50,fill=orange!20,thick]
+\tikzstyle{map}=[minimum size=28pt,shape=circle,draw=green!50,fill=green!20,thick]
+\tikzstyle{mainedge}=[->,thick]
+
+\begin{document}
+\begin{tikzpicture}
+
+% measurement nodes
+\node[measurement] (z_tp1)  at (6,1) {$z_{t+1}$};
+\node[measurement] (z_t)    at (4,1) {$z_t$};
+\node[measurement] (z_tm1)  at (2,1) {$z_{t-1}$};
+
+% map node
+\node[map] (m)  at (4,-0.5) {$m$}
+  edge[mainedge] (z_tm1)
+  edge[mainedge] (z_t)
+  edge[mainedge] (z_tp1);
+
+% state nodes
+\node[state] (x_tp1)  at (6,3) {$x_{t+1}$}
+  edge[mainedge] (z_tp1);
+\node[state] (x_t)    at (4,3) {$x_t  $}
+  edge[mainedge] (x_tp1)
+  edge[mainedge] (z_t);
+\node[state] (x_tm1)  at (2,3) {$x_{t-1}$}
+  edge[mainedge] (x_t)
+  edge[mainedge] (z_tm1);
+
+% control nodes
+\node[control] (u_tp1)  at (5,2) {$u_{t+1}$}
+  edge[mainedge] (x_tp1);
+\node[control] (u_t)    at (3,2) {$u_t$}
+  edge[mainedge] (x_t);
+\node[control] (u_tm1)  at (1,2) {$u_{t-1}$}
+  edge[mainedge] (x_tm1);
+
+\end{tikzpicture}
+\end{document}
+
