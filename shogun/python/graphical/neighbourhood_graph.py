@@ -39,8 +39,7 @@ def plot_neighborhood_graph(x, nn, axis):
 		ys = [x[i,1], x[nn[1,i], 1]]
 		axis.plot(xs, ys, COLS[int(y[i])])
 
-figure, axarr = pyplot.subplots(1, 2)
-# axis.set_ylim(-0.2,0.6)
+figure, axarr = pyplot.subplots(3, 1)
 x, y = sandwich_data()
 
 features = RealFeatures(x.T)
@@ -50,21 +49,35 @@ print('%d vectors with %d features' % (features.get_num_vectors(), features.get_
 assert(features.get_num_vectors() == labels.get_num_labels())
 
 distance = EuclideanDistance(features, features)
-k = 2 
+k = 2
 knn = KNN(k, distance, labels)
 
 plot_data(x, y, axarr[0])
 plot_neighborhood_graph(x, knn.nearest_neighbors(), axarr[0])
+axarr[0].set_aspect('equal')
+axarr[0].set_xlim(-6, 4)
+axarr[0].set_ylim(-3, 2)
 
 lmnn = LMNN(features, labels, k)
 lmnn.set_maxiter(10000)
 lmnn.train()
 L = lmnn.get_linear_transform()
-# x = numpy.dot(x, L.T) ## to see the data after the linear transformation
 knn.set_distance(lmnn.get_distance())
 
 plot_data(x, y, axarr[1])
 plot_neighborhood_graph(x, knn.nearest_neighbors(), axarr[1])
+axarr[1].set_aspect('equal')
+axarr[1].set_xlim(-6, 4)
+axarr[1].set_ylim(-3, 2)
 
-figure.text(.4, .95, '1-NN graph with Euclidean and LMNN distances')
+xL = numpy.dot(x, L.T) ## to see the data after the linear transformation
+features = RealFeatures(xL.T)
+distance = EuclideanDistance(features, features)
+knn.set_distance(distance)
+
+plot_data(xL, y, axarr[2])
+plot_neighborhood_graph(xL, knn.nearest_neighbors(), axarr[2])
+axarr[2].set_aspect('equal')
+axarr[2].set_ylim(-3, 2)
+
 pyplot.show()
