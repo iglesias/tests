@@ -11,10 +11,15 @@
 
 using namespace std;
 
-int cost(const vector<vector<int>>& ar, const vector<int>& perm)
+int cost(const vector<vector<int>>& ar, const vector<int>& perm, int best_cost)
 {
 	int ans = ar[0][perm[0]];
-	FOR(i, 1, perm.size()) ans += ar[perm[i-1]+1][perm[i]];
+	FOR(i, 1, perm.size())
+	{
+		if (ans >= best_cost) return best_cost;
+		ans += ar[perm[i-1]+1][perm[i]];
+	}
+
 	return ans;
 }
 
@@ -38,7 +43,7 @@ int main()
 	auto start = chrono::system_clock::now(); 
 	do
 	{
-		best_cost = min(best_cost, cost(ar, perm));
+		best_cost = min(best_cost, cost(ar, perm, best_cost));
 		it++;
 	} while(next_permutation(ALL(perm)));
 	cout << chrono::duration<double>(chrono::system_clock::now()-start).count() << endl;
