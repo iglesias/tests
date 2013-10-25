@@ -3,8 +3,8 @@
 from modshogun import *
 
 # load metagenomics ape gut data set
-features = RealFeatures(CSVFile('../data/fm_ape_gut.txt'))
-labels = MulticlassLabels(CSVFile('../data/label_ape_gut.txt'))
+features = RealFeatures(CSVFile('/home/iglesias/workspace/shogun/data/multiclass/fm_ape_gut.dat'))
+labels = MulticlassLabels(CSVFile('/home/iglesias/workspace/shogun/data/multiclass/label_ape_gut.dat'))
 
 print('Number of examples = %d, number of features = %d.' % (features.get_num_vectors(), features.get_num_features()))
 
