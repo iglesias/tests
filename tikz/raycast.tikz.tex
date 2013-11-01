@@ -1,0 +1,71 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage[active,tightpage]{preview}
+\usepackage{amssymb}
+
+\PreviewEnvironment{tikzpicture}
+
+\begin{document}
+\begin{tikzpicture}
+  % center
+  \node[color=black] at (0,0) {$\bullet$};
+
+  % to lines in case 1
+  \draw[color=blue,dashed] (0,0) -- (-4,0.5);
+  \draw[color=blue,dashed] (0,0) -- (-0.5,4);
+
+  % to lines in case 3
+  \draw[color=blue,dashed] (0,0) -- (4.7,0);
+  \draw[color=blue,dashed] (0,0) -- (2.7,-4);
+
+  \draw[color=blue,dashed] (0,0) -- (4.05,-4.05/3);
+  \draw[color=blue,dashed] (0,0) -- (3.4,3.4*-2/2.5);
+
+  % to lines in case 4
+  \draw[color=blue,dashed] (0,0) -- (-0.5,-3);
+  \draw[color=blue,dashed] (0,0) -- (-3.5,-1);
+
+  \draw[color=blue,dashed] (0,0) -- (-1.25,2*-1.25);
+  \draw[color=blue,dashed] (0,0) -- (-2,-2);
+
+  % Case 1
+  \node[color=black] at (-4,3.5) {Case 1};
+
+  \draw[color=red] (-4,0.5) -- (-0.5,4);
+  \node[color=black] at (-4.2, 0.7) {$l_1$}; 
+
+  \draw[color=black] (-5,1) -- (-1,5);
+  \node[color=black] at (-5.2, 1.2) {$l_2$};
+
+  % Case 2
+  \node[color=black] at (4,4) {Case 2};
+
+  \draw[color=green] (2,4.5) -- (4,2.5);
+  \node[color=black] at (1.8, 4.7) {$l_1$};
+
+  \draw[color=black] (1,4) -- (4,1);
+  \node[color=black] at (0.8, 4.2) {$l_2$};
+
+  % Case 3
+  \node[color=black] at (5,-2) {Case 3};
+
+  \draw[color=red] (4.7,0) -- (4.05,-4.05/3);
+  \draw[color=green] (4.05,-4.05/3) -- (3.4,3.4*-2/2.5);
+  \draw[color=red] (3.4,3.4*-2/2.5) -- (2.7,-4);
+  \node[color=black] at (4.9,0.2) {$l_1$};
+
+  \draw[color=black] (3,-1) -- (2.5,-2);
+  \node[color=black] at (3.2,-0.8) {$l_2$};
+
+  % Case 4
+  \node[color=black] at (-3,-3) {Case 4};
+  \draw[color=red] (-0.5,-3) -- (-1.25,2*-1.25);
+  \draw[color=green] (-1.25,2*-1.25) -- (-2,-2);
+  \draw[color=red] (-2,-2) -- (-3.5,-1);
+  \node[color=black] at (-3.7,-0.8) {$l_1$};
+
+  \draw[color=black] (-1,-2) -- (-3,-2);
+  \node[color=black] at (-3.2,-2) {$l_2$};
+
+\end{tikzpicture}
+\end{document}
