@@ -1,0 +1,51 @@
+\documentclass{article}
+\usepackage{tikz}
+%%%<
+\usepackage{verbatim}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{5pt}%
+%%%>
+\usetikzlibrary{arrows}
+\usetikzlibrary{positioning}
+\begin{document}
+%\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+%  thick,main node/.style={circle,fill=blue!20,draw,font=\sffamily\Large\bfseries}]
+\begin{tikzpicture}[main node/.style={circle,fill=blue!20,draw,font=\sffamily\Large\bfseries},
+	obs node/.style={circle,fill=red!20,draw,font=\sffamily\normalsize\bfseries}]
+
+  \node[main node] (1) at (0,2*1) {$y_1$};
+  \node[main node] (2) at (-0.9511*2,2*0.30901) {$y_2$};
+  \node[main node] (3) at (2*0.9511,2*0.30901) {$y_3$};
+  \node[main node] (4) at (-0.5878*2,-0.8090*2) {$y_4$};
+  \node[main node] (5) at (0.5878*2,-0.8090*2) {$y_5$};
+
+  \node[obs node] (6)  at (0,3) {$x_1$};
+  \node[obs node] (7) at (-0.9511*3,3*0.30901) {$x_2$};
+  \node[obs node] (8) at (3*0.9511,3*0.30901) {$x_3$};
+  \node[obs node] (9) at (-0.5878*3,-0.8090*3) {$x_4$};
+  \node[obs node] (10) at (0.5878*3,-0.8090*3) {$x_5$};
+
+  % label
+  \draw (1) to (2);
+  \draw (1) to (3);
+  \draw (1) to (4);
+  \draw (1) to (5);
+
+  \draw (2) to (3);
+  \draw (2) to (4);
+  \draw (2) to (5);
+
+  \draw (3) to (4);
+  \draw (3) to (5);
+
+  \draw (4) to (5);
+
+  % observation
+  \draw (1) to (6);
+  \draw (2) to (7);
+  \draw (3) to (8);
+  \draw (4) to (9);
+  \draw (5) to (10);
+\end{tikzpicture}
+\end{document}
