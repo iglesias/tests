@@ -1,0 +1,65 @@
+\documentclass{article}
+
+\usepackage{subfig}
+\usepackage{tikz}
+\usepackage[active,tightpage]{preview}
+
+\PreviewEnvironment{tikzpicture}
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{positioning}
+
+\begin{document}
+
+\begin{figure}[htb]
+  \subfloat{
+    \begin{tikzpicture}[main node/.style={circle,fill=blue!20,draw,font=\sffamily\Large\bfseries}]
+
+      % vertices
+      \node[main node] (1) at (0,2*1) {$p_1$};
+      \node[main node] (2) at (-0.9511*2,2*0.30901) {$p_2$};
+      \node[main node] (3) at (2*0.9511,2*0.30901) {$p_3$};
+      \node[main node] (4) at (-0.5878*2,-0.8090*2) {$p_4$};
+      \node[main node] (5) at (0.5878*2,-0.8090*2) {$p_5$};
+
+      % edges
+      \draw (1) to (2);
+      \draw (1) to (3);
+      \draw (1) to (4);
+      \draw (1) to (5);
+
+      \draw (2) to (3);
+      \draw (2) to (4);
+      \draw (2) to (5);
+
+      \draw (3) to (4);
+      \draw (3) to (5);
+
+      \draw (4) to (5);
+
+    \end{tikzpicture}
+  }
+
+  \quad
+  \subfloat{
+    \begin{tikzpicture}[main node/.style={circle,fill=red!20,draw,font=\sffamily\Large\bfseries}]
+
+    % vertices
+    \node[main node] (1) at (0,2*1) {$p_1$};
+    \node[main node] (2) at (-0.9511*2,2*0.30901) {$p_2$};
+    \node[main node] (3) at (2*0.9511,2*0.30901) {$p_3$};
+    \node[main node] (4) at (-0.5878*2,-0.8090*2) {$p_4$};
+    \node[main node] (5) at (0.5878*2,-0.8090*2) {$p_5$};
+
+    % edges
+    \draw (1) to (2);
+    \draw (1) to (3);
+    \draw (2) to (4);
+    \draw (3) to (5);
+    \draw (4) to (5);
+
+    \end{tikzpicture}
+  }
+\end{figure}
+
+\end{document}
