@@ -3,7 +3,6 @@
 \usepackage{subfig}
 \usepackage{tikz}
 \usepackage[active,tightpage]{preview}
-
 \PreviewEnvironment{tikzpicture}
 
 \usetikzlibrary{arrows}
@@ -11,7 +10,7 @@
 
 \begin{document}
 
-\begin{figure}[htb]
+\begin{figure}
   \subfloat{
     \begin{tikzpicture}[main node/.style={circle,fill=blue!20,draw,font=\sffamily\Large\bfseries}]
 
@@ -39,7 +38,6 @@
 
     \end{tikzpicture}
   }
-
   \quad
   \subfloat{
     \begin{tikzpicture}[main node/.style={circle,fill=red!20,draw,font=\sffamily\Large\bfseries}]
