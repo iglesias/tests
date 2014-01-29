@@ -3,3 +3,6 @@
 
 # executables in bin directories
 */bin/*
+
+# compiles mex-files
+matlab/mex/*/*.mexa64
