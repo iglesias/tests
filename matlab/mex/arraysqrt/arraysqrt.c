@@ -6,6 +6,9 @@
  * Computes the element-wise square root of a vector.
  *
  * This is a mex-file for MATLAB.
+ *
+ * Based on the example in the documentation
+ * http://www.mathworks.nl/help/matlab/matlab_external/using-mex-files-to-call-c-c-and-fortran-programs.html#bri958k-1
  */
 
 void arraysqrt(double *x, double *y, mwSize n)
@@ -19,12 +22,12 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
     /* check for proper number of arguments and return values */
     if (nrhs != 1)
-        mexErrMsgIdAndTxt("arraysqrt:nrhs", "Two inputs required.");
+        mexErrMsgIdAndTxt("arraysqrt:nrhs", "One inputs required.");
     
     if (nlhs != 1)
         mexErrMsgIdAndTxt("arraysqrt:nlhs", "One output required.");
     
-    /* check for proper type of arugments */
+    /* check for proper type of arguments */
     //TODO
     
     /* prepare input data */
