@@ -1,3 +1,4 @@
+#include <shogun/base/init.h>
 #include <shogun/metric/LMNN.h>
 #include <shogun/features/DenseFeatures.h>
 #include <shogun/labels/MulticlassLabels.h>
