@@ -4,7 +4,7 @@ import sys
 import cv2
 
 if len(sys.argv) < 2:
-  print 'Usage: ./apply_bgs_play.py [VIDEO]'
+  print 'Usage: ./opencv_background_subtraction_play.py [VIDEO]'
   sys.exit(1)
 
 video_capture = cv2.VideoCapture(sys.argv[1])
