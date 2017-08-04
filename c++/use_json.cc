@@ -1,5 +1,7 @@
+// Example usage of the json library available at https://nlohmann.github.io/json/
+// g++ -I ~/workspace/json/src -std=c++14 use_json.cc
+
 #include <fstream>
-#include <typeinfo>
 
 #include "json.hpp"
 
