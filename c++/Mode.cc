@@ -1,33 +1,41 @@
 #include <iostream>
 #include <unordered_map>
-#include <utility>
 #include <vector>
 
 int GetMode(const std::vector<int>& vi)
 {
-	std::unordered_map<int, int> dict;
+  if (vi.size() == 0)
+  {
+    std::cerr << "No mode for empty array.\n";
+    std::exit(1);
+  }
 
-	for (unsigned int i = 0; i < vi.size(); i++)
-	{
-		if (dict.find(vi[i]) == dict.end()) dict.insert(std::make_pair(vi[i], 1));
-		else
-		{
-			int tmp = dict.find(vi[i])->second;
-			dict.erase(vi[i]);
-			dict.insert(std::make_pair(vi[i], tmp+1));
-		}
-	}
+  std::unordered_map<int, int> dict;
+  int mode = vi[0];
+  int max_freq = 1;
 
-	auto mode_it = dict.begin();
-	for (auto it = next(mode_it); it != dict.end(); it++)
-		if (it->second > mode_it->second) mode_it = it;
+  for (int n : vi)
+  {
+    if (dict.find(n) == dict.end())
+    {
+      dict.insert({n, 1});
+    }
+    else
+    {
+      dict[n]++;
+      if (dict[n] > max_freq)
+      {
+        max_freq = dict[n];
+        mode = n;
+      }
+    }
+  }
 
-	return mode_it->first;
+  return mode;
 }
 
 int main()
 {
-	std::vector<int> vi = {1, 2, 2, 3, 4, 0};
-	std::cout << GetMode(vi) << std::endl;
-	return 0;
+  std::vector<int> vi = {1, 2, 2, 3, 4, 0};
+  std::cout << GetMode(vi) << std::endl;
 }
