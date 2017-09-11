@@ -1,8 +1,12 @@
-# directories for executables
-*bin/
+# A bit of a hack useful to ignore binaries (actually files without extension).
+# ignore all
+*
+# unignore files with extensions
+!*.*
+# Unignore all directories
+!*/
 
-# executables in bin directories
-*/bin/*
-
-# compiles mex-files
+# compiled mex-files
 matlab/mex/*/*.mexa64
+
+*.o
